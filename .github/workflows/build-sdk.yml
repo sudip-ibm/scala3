@@ -39,6 +39,9 @@ on:
       win-x86_64-digest:
         description: The SHA256 of the uploaded artifact (`win x86-64`)
         value      : ${{ jobs.build.outputs.win-x86_64-digest }}
+      linux-s390x-id:
+        description: The SHA256 of the uploaded artifact (`linux s390x`)
+        value      : ${{ jobs.build.outputs.linux-s390x-id }}
 
 
 jobs:
@@ -48,6 +51,7 @@ jobs:
       universal-id     : ${{ steps.universal.outputs.artifact-id }}
       linux-x86_64-id  : ${{ steps.linux-x86_64.outputs.artifact-id }}
       linux-aarch64-id : ${{ steps.linux-aarch64.outputs.artifact-id }}
+      linux-s390x-id   : ${{ steps.linux-s390x.outputs.artifact-id }}
       mac-x86_64-id    : ${{ steps.mac-x86_64.outputs.artifact-id }}
       mac-aarch64-id   : ${{ steps.mac-aarch64.outputs.artifact-id }}
       win-x86_64-id    : ${{ steps.win-x86_64.outputs.artifact-id }}
@@ -66,6 +70,8 @@ jobs:
         run : ./project/scripts/sbt dist-linux-x86_64/Universal/stage
       - name: Build and pack the SDK (linux aarch64)
         run : ./project/scripts/sbt dist-linux-aarch64/Universal/stage
+      - name: Build and pack the SDK (linux s390x)
+        run : ./project/scripts/sbt dist-linux-s390x/Universal/stage
       - name: Build and pack the SDK (mac x86-64)
         run : ./project/scripts/sbt dist-mac-x86_64/Universal/stage
       - name: Build and pack the SDK (mac aarch64)
